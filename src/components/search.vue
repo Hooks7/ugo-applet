@@ -22,13 +22,26 @@ export default {
   methods: {
     // 点击
     goSearch() {
+      // 更新搜索框样式
       this.focused = true;
       this.placeholder = "请输入您想要的商品";
+      
+        // 通过 api 获得小程序窗口的尺寸（高度）
+      const {windowHeight} = wx.getSystemInfoSync()
+
+      this.$emit('search',{
+        windowHeight:windowHeight+'px'
+      })
     },
     // 取消
     cancel() {
+       // 更新搜索框样式
       this.focused = false;
       this.placeholder = "";
+
+      this.$emit('search',{
+        windowHeight:''
+      })
     }
   }
 };
@@ -120,6 +133,7 @@ export default {
       background-color: #ffffff;
       border-radius: 5rpx;
       padding-left: 70rpx;
+
     }
   }
 }
